@@ -1,24 +1,30 @@
 package com.pojo;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity(name="oms_rejected")
-public class RejectedTable implements Serializable{
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity(name="oms_rejected")
+public class RejectedTable{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int rejected_id;
+	
 	public String orderType;
 	public String bid_offer;
 	public double price;
 	public int quantity;
+	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
-	
-	
-	@Id
-	public int rejected_id;
 	
 	@OneToOne
 	private OrderGenerator ordergenerator;
@@ -31,23 +37,38 @@ public class RejectedTable implements Serializable{
 
 
 
-	
-
-
-	public RejectedTable(String orderType, String bid_offer, double price, int quantity, Date date, int rejected_id,
+	public RejectedTable(int rejected_id, String orderType, String bid_offer, double price, int quantity, Date date,
 			OrderGenerator ordergenerator) {
 		super();
+		this.rejected_id = rejected_id;
 		this.orderType = orderType;
 		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
 		this.date = date;
-		this.rejected_id = rejected_id;
 		this.ordergenerator = ordergenerator;
 	}
 
 
 
+		@Override
+		public String toString() {
+			return "RejectedTable [rejected_id=" + rejected_id + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+					+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + ", ordergenerator="
+					+ ordergenerator + "]";
+		}
+
+
+
+	public int getRejected_id() {
+		return rejected_id;
+	}
+
+
+
+	public void setRejected_id(int rejected_id) {
+		this.rejected_id = rejected_id;
+	}
 
 
 
@@ -111,9 +132,20 @@ public class RejectedTable implements Serializable{
 
 
 
+	public OrderGenerator getOrdergenerator() {
+		return ordergenerator;
+	}
+
+
+
+	public void setOrdergenerator(OrderGenerator ordergenerator) {
+		this.ordergenerator = ordergenerator;
+	}
+
 	
+
 	
-	
-	
-	
+
+
+		
 }

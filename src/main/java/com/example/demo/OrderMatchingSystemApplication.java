@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "com")
 @EntityScan(basePackages = "com")
 @EnableJpaRepositories(basePackages = "com")
-
 public class OrderMatchingSystemApplication {
 
 	public static void main(String[] args) {

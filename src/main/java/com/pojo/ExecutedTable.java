@@ -3,13 +3,18 @@ package com.pojo;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name="oms_executed")
 public class ExecutedTable {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int tradeId;
 	
 	
@@ -18,6 +23,8 @@ public class ExecutedTable {
 	public String bid_offer;
 	public double price;
 	public int quantity;
+	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
 	
@@ -31,15 +38,24 @@ public class ExecutedTable {
 
 
 	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date,
-			OrderGenerator order_id) {
-		super();
+			OrderGenerator ordergenerator) {
+		
 		this.tradeId = tradeId;
 		this.orderType = orderType;
 		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
 		this.date = date;
-		this.ordergenerator = order_id;
+		this.ordergenerator = ordergenerator;
+	}
+
+
+	
+	@Override
+	public String toString() {
+		return "ExecutedTable [tradeId=" + tradeId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + ", ordergenerator="
+				+ ordergenerator + "]";
 	}
 
 
@@ -103,17 +119,15 @@ public class ExecutedTable {
 	}
 
 
-	public OrderGenerator getOrder_id() {
+	public OrderGenerator getOrdergenerator() {
 		return ordergenerator;
 	}
 
 
-	public void setOrder_id(OrderGenerator order_id) {
-		this.ordergenerator = order_id;
+	public void setOrdergenerator(OrderGenerator ordergenerator) {
+		this.ordergenerator = ordergenerator;
 	}
-	
-	
-	
-	
 
+	
+	
 }

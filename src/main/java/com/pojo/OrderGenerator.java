@@ -1,34 +1,35 @@
 package com.pojo;
 
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name="oms_order")
 public class OrderGenerator {
 
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int orderId;
 	
 	public String orderType;
 	public String bid_offer;
 	public double price;
 	public int quantity;
+	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
-		public OrderGenerator() {
+	
+	public OrderGenerator() {
 		
 	}
 	
-	
-	
-	
-	
+
 	public OrderGenerator(int orderId, String orderType, String bid_offer, double price, int quantity, Date date) {
 		super();
 		this.orderId = orderId;
@@ -42,6 +43,12 @@ public class OrderGenerator {
 
 
 
+
+	@Override
+	public String toString() {
+		return "OrderGenerator [orderId=" + orderId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
+	}
 
 	public int getOrderId() {
 		return orderId;
