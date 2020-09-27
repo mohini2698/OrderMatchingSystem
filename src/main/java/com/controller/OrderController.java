@@ -68,5 +68,16 @@ public class OrderController {
 	}
 	
 	
-
+	//bid get price quantity
+	
+	
+	
+	//offer get price quantity
+	
+	
+	
+	//if both can be possible in get mapping    //nested query ig
+	
+	
+	
 }

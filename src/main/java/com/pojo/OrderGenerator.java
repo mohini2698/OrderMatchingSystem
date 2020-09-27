@@ -21,7 +21,9 @@ public class OrderGenerator {
 	public double price;
 	public int quantity;
 	
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	
+	//2020-09-27 20:16:49.441
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.sss")
 	Date date=new Date();
 	
 	
