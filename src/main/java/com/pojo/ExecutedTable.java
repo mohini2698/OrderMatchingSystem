@@ -2,10 +2,13 @@ package com.pojo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,7 +31,8 @@ public class ExecutedTable {
 	Date date=new Date();
 	
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="orderId")
 	private OrderGenerator ordergenerator;
 
 
@@ -37,8 +41,8 @@ public class ExecutedTable {
 	}
 
 
-	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date,
-			OrderGenerator ordergenerator) {
+	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date, OrderGenerator ordergenerator
+			) {
 		
 		this.tradeId = tradeId;
 		this.orderType = orderType;

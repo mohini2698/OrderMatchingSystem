@@ -3,10 +3,13 @@ package com.pojo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,7 +29,8 @@ public class RejectedTable{
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="orderId")
 	private OrderGenerator ordergenerator;
 
 	

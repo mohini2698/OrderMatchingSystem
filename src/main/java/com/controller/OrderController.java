@@ -67,29 +67,6 @@ public class OrderController {
 		return response;
 	}
 	
-	//to add orders in executed table
-	@PostMapping("/executed")
-	public ResponseEntity<ExecutedTable> saveOrder(@RequestBody ExecutedTable order)
-	{
-		ExecutedTable added=exdao.save(order);
-			
-		ResponseEntity<ExecutedTable> response=new ResponseEntity<ExecutedTable>(added,HttpStatus.CREATED);
-		return response;
-	}
-	
-	//to add orders in executed table
-	@PostMapping("/rejected")
-	public ResponseEntity<RejectedTable> saveOrder(@RequestBody RejectedTable order)
-	{
-		RejectedTable added=rdao.save(order);
-				
-		ResponseEntity<RejectedTable> response=new ResponseEntity<RejectedTable>(added,HttpStatus.CREATED);
-		return response;
-	}
-	
-	
-	
-	
 	
 
 }
