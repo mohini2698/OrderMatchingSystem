@@ -1,14 +1,22 @@
 package com.service;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.backoff.Sleeper;
 import org.springframework.stereotype.Service;
 
+import com.dao.BidDAO;
 import com.dao.ExecutedDAO;
+import com.dao.OfferDAO;
 import com.dao.OrderDAO;
 import com.dao.RejectedDAO;
+import com.pojo.BidTable;
+import com.pojo.OfferTable;
 import com.pojo.OrderGenerator;
 
 @Service
@@ -21,14 +29,50 @@ public class OMS_Service {
 	
 	@Autowired
 	private OrderDAO orderdao;
+	
+	
+	@Autowired
+	private BidDAO biddao;
+	
+	@Autowired
+	private OfferDAO offerdao;
+		
+		
+		
 
-	public OMS_Service(OrderDAO orderdao) {
+	public OMS_Service(OrderDAO orderdao, BidDAO biddao, OfferDAO offerdao) {
 		
 		this.orderdao = orderdao;
+		this.biddao = biddao;
+		this.offerdao = offerdao;
 	}
-	
 
+	
+	
 	@PostConstruct
+	public void checkdatabase() {
+		
+		int orderId = 1; 
+		boolean exists = orderdao.existsById(orderId);
+		
+		if(exists==false)
+		{
+			loaddata();
+		}
+		
+		
+		int bidId = 1; 
+		boolean exists1 = biddao.existsById(orderId);
+		
+		if(exists1==false)
+		{
+			separatedata();
+		}
+
+		
+	}
+
+	
 	public void loaddata() {
 		
 		
@@ -44,19 +88,11 @@ public class OMS_Service {
 	          
 	    	order.setBid_offer(ro.getBid_offer());
 	  		order.setOrderType(ro.getOrderType());
-	  		
-	  		if(order.getOrderType()=="limit")
-	  		{
-	  			order.setPrice(ro.getPrice());
-	  		}
-	  		else
-	  		{
-	  			order.setPrice(0);
-	  		}
-	  		
+	  		order.setPrice(ro.getPrice());
 	  		order.setQuantity(ro.getQuantity());
 	  		order.setDate(ro.getDate());
 	  		
+	 
 	  		
 	  		orderdao.save(order);
 	  		
@@ -75,9 +111,59 @@ public class OMS_Service {
 		
 	}
 	
+	//put in bid / offer
 	
-	
-	
+	public void separatedata(){
+
+		//orderdao.findAll();
+		
+		List<OrderGenerator> order = orderdao.findAll();
+  		
+		
+		for(OrderGenerator i: order)
+		{
+			int id=i.getOrderId();
+	  		String category=i.getBid_offer();
+	  		String type=i.getOrderType();
+	  		double price=i.getPrice();
+	  		int q=i.getQuantity();
+	  		Date d=i.getDate();
+	  		
+	  		
+	  		
+	  		
+	  		if(i.getBid_offer().equals("bid"))
+	  		{
+	  			System.out.println(i.getBid_offer()+" if");
+	  			BidTable bid=new BidTable();
+	  			bid.setOrderType(type);
+	  			bid.setPrice(price);
+	  			bid.setQuantity(q);
+	  			bid.setDate(d);
+	  			bid.setOrderId(i.getOrderId());
+	  			
+	  			biddao.save(bid);
+	  		}
+	  		else
+	  		{
+	  			System.out.println(i.getBid_offer()+" else");
+	  			OfferTable offer=new OfferTable();
+	  			offer.setOrderType(type);
+	  			offer.setPrice(price);
+	  			offer.setQuantity(q);
+	  			offer.setDate(d);
+	  			offer.setOrderId(i.getOrderId());
+	  			
+	  			offerdao.save(offer);
+	  		}
+	  	
+		}
+    	
+  		
+  	
+  		
+  			
+	}
 	
 	
 	

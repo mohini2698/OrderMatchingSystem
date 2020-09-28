@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dao.BidDAO;
 import com.dao.ExecutedDAO;
 import com.dao.OrderDAO;
 import com.dao.RejectedDAO;
+import com.pojo.BidTable;
 import com.pojo.ExecutedTable;
 import com.pojo.OrderGenerator;
 import com.pojo.RejectedTable;
@@ -27,6 +29,10 @@ public class OrderController {
 	
 	@Autowired
 	RejectedDAO rdao;
+	
+	
+	@Autowired
+	BidDAO bdao;
 	
 	
 	//to get all orders from pending table
@@ -77,6 +83,16 @@ public class OrderController {
 	
 	
 	//if both can be possible in get mapping    //nested query ig
+	
+	
+	
+	@GetMapping("/show")
+	public ResponseEntity<List<BidTable>> findByOrderByPriceDescDateAsc(@RequestBody BidTable order)
+	{
+		List<BidTable> orders=bdao.findByOrderByPriceDescDateAsc();
+		ResponseEntity<List<BidTable>> response=new ResponseEntity<List<BidTable>>(orders,HttpStatus.FOUND);
+		return response;
+	}
 	
 	
 	

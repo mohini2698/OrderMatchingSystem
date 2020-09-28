@@ -31,9 +31,9 @@ public class ExecutedTable {
 	Date date=new Date();
 	
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	/*@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="orderId")
-	private OrderGenerator ordergenerator;
+	private OrderGenerator ordergenerator;*/
 
 
 	public ExecutedTable() {
@@ -41,7 +41,7 @@ public class ExecutedTable {
 	}
 
 
-	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date, OrderGenerator ordergenerator
+	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date
 			) {
 		
 		this.tradeId = tradeId;
@@ -50,16 +50,18 @@ public class ExecutedTable {
 		this.price = price;
 		this.quantity = quantity;
 		this.date = date;
-		this.ordergenerator = ordergenerator;
+		
 	}
 
 
 	
+	
+
+
 	@Override
 	public String toString() {
 		return "ExecutedTable [tradeId=" + tradeId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
-				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + ", ordergenerator="
-				+ ordergenerator + "]";
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
 	}
 
 
@@ -123,14 +125,7 @@ public class ExecutedTable {
 	}
 
 
-	public OrderGenerator getOrdergenerator() {
-		return ordergenerator;
-	}
-
-
-	public void setOrdergenerator(OrderGenerator ordergenerator) {
-		this.ordergenerator = ordergenerator;
-	}
+	
 
 	
 	

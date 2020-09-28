@@ -49,10 +49,10 @@ public class RandomOrders {
 
 
 	
-	//price
+	//price //circuit check satisfied
 	public double getPrice() {
-		double p = roundTwoDecimals(getRandomDoubleBetweenRange(2900.00,3000.00));
-		return p;
+		double p = roundTwoDecimals(getRandomDoubleBetweenRange(2700.00,3300.00));
+		return Math.round(p * 2) / 2.0;
 	}
 
 
