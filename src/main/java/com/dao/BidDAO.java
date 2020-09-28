@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.pojo.BidTable;
 
 @Repository
-public interface BidDAO extends JpaRepository<BidTable, Integer>{
+public interface BidDAO extends CrudRepository<BidTable, Integer>{
 	
 	
-	@Query("FROM oms_bid ORDER BY price desc,time asc")
+	@Query("FROM oms_bid ORDER BY price desc,date asc")
 	List<BidTable> findByOrderByPriceDescDateAsc();
 
 }

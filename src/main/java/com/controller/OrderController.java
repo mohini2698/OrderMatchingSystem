@@ -18,6 +18,7 @@ import com.pojo.BidTable;
 import com.pojo.ExecutedTable;
 import com.pojo.OrderGenerator;
 import com.pojo.RejectedTable;
+import com.service.IBidService;
 
 @RestController
 public class OrderController {
@@ -33,6 +34,10 @@ public class OrderController {
 	
 	@Autowired
 	BidDAO bdao;
+	
+	
+	@Autowired
+	private IBidService bidservice;
 	
 	
 	//to get all orders from pending table
@@ -87,13 +92,11 @@ public class OrderController {
 	
 	
 	@GetMapping("/show")
-	public ResponseEntity<List<BidTable>> findByOrderByPriceDescDateAsc(@RequestBody BidTable order)
-	{
-		List<BidTable> orders=bdao.findByOrderByPriceDescDateAsc();
-		ResponseEntity<List<BidTable>> response=new ResponseEntity<List<BidTable>>(orders,HttpStatus.FOUND);
-		return response;
-	}
-	
-	
+	//findByOrderByPriceDescDateAsc
+    public List<BidTable> findByOrderByPriceDescDateAsc() {
+
+        return bidservice.findAllOrderByPriceDescDateAsc();
+    }
+
 	
 }

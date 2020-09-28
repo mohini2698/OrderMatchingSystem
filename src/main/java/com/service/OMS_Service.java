@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.retry.backoff.Sleeper;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import com.pojo.OfferTable;
 import com.pojo.OrderGenerator;
 
 @Service
-public class OMS_Service {
+public class OMS_Service implements IBidService,IOfferService{
 
 
 	
@@ -163,6 +164,23 @@ public class OMS_Service {
   	
   		
   			
+	}
+
+
+
+	@Override
+	public List<BidTable> findAllOrderByPriceDescDateAsc() {
+		// TODO Auto-generated method stub
+		
+		return biddao.findByOrderByPriceDescDateAsc();
+	}
+	
+	
+	@Override
+	public List<OfferTable> findAllOrderByPriceDescDateAsc() {
+		// TODO Auto-generated method stub
+		
+		return offerdao.findByOrderByPriceDescDateAsc();
 	}
 	
 	
