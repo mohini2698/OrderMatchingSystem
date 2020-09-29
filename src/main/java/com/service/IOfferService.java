@@ -7,5 +7,5 @@ import com.pojo.OfferTable;
 
 public interface IOfferService {
 
-	List<OfferTable> findAllOrderByPriceDescDateAsc();	
+	List<OfferTable> findAllOrderByPriceAscDateAsc();	
 }

@@ -16,9 +16,11 @@ import com.dao.OrderDAO;
 import com.dao.RejectedDAO;
 import com.pojo.BidTable;
 import com.pojo.ExecutedTable;
+import com.pojo.OfferTable;
 import com.pojo.OrderGenerator;
 import com.pojo.RejectedTable;
 import com.service.IBidService;
+import com.service.IOfferService;
 
 @RestController
 public class OrderController {
@@ -38,6 +40,10 @@ public class OrderController {
 	
 	@Autowired
 	private IBidService bidservice;
+	
+	
+	@Autowired
+	private IOfferService offerservice;
 	
 	
 	//to get all orders from pending table
@@ -96,6 +102,15 @@ public class OrderController {
     public List<BidTable> findByOrderByPriceDescDateAsc() {
 
         return bidservice.findAllOrderByPriceDescDateAsc();
+    }
+
+	
+	
+	@GetMapping("/show1")
+	//findByOrderByPriceDescDateAsc
+    public List<OfferTable> findByOrderByPriceAscDateAsc() {
+
+        return offerservice.findAllOrderByPriceAscDateAsc();
     }
 
 	
