@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.retry.backoff.Sleeper;
@@ -25,6 +27,7 @@ import com.pojo.OrderGenerator;
 @Service
 public class OMS_Service implements IBidService,IOfferService{
 
+	 Logger logger = LoggerFactory.getLogger(OMS_Service.class);
 
 
 
@@ -184,7 +187,7 @@ public class OMS_Service implements IBidService,IOfferService{
 	@Override
 	public List<BidTable> findAllOrderByPriceDescDateAsc() {
 		// TODO Auto-generated method stub
-
+		logger.debug("in list of bid table method");
 		return biddao.findByOrderByPriceDescDateAsc();
 	}
 

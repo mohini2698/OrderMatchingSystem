@@ -1,5 +1,6 @@
 package com.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name="oms_order")
-public class OrderGenerator {
+public class OrderGenerator implements Serializable{
 
 	
 	@Id
@@ -23,7 +24,7 @@ public class OrderGenerator {
 	
 	
 	//2020-09-27 20:16:49.441
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.sss")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
 	

@@ -2,12 +2,17 @@ package com.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dao.BidDAO;
@@ -21,9 +26,14 @@ import com.pojo.OrderGenerator;
 import com.pojo.RejectedTable;
 import com.service.IBidService;
 import com.service.IOfferService;
+import com.service.OMS_Service;
 
 @RestController
+@CrossOrigin
 public class OrderController {
+	
+	 Logger logger = LoggerFactory.getLogger(OrderController.class);
+	 
 	@Autowired
 	OrderDAO dao;
 	
@@ -46,11 +56,20 @@ public class OrderController {
 	private IOfferService offerservice;
 	
 	
+	//1.logger
+	//2.ui logging
+	//3.request mapping
+	//4.packet refactor com.citi.dao com.citi.entity
+	//5.Rest .. crossorigin
+	
 	//to get all orders from pending table
-	@GetMapping("/orders")
+	//@GetMapping("/orders")
+	@RequestMapping(value="/orders",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderGenerator>> findAllOrders(@RequestBody OrderGenerator order)
 	{
+		logger.debug("in get list of all orders");
 		List<OrderGenerator> orders=dao.findAll();
+		logger.debug(" all orders"+orders);
 		ResponseEntity<List<OrderGenerator>> response=new ResponseEntity<List<OrderGenerator>>(orders,HttpStatus.FOUND);
 		return response;
 	}
