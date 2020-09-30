@@ -31,7 +31,7 @@ import com.citi.service.IOfferService;
 import com.citi.service.OMS_Service;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080")
 public class OrderController {
 	
 	//Logger logger = LoggerFactory.getLogger(OrderController.class);

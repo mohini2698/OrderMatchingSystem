@@ -13,9 +13,9 @@ import com.citi.dao.OrderDAO;
 import com.citi.dao.PendingDAO;
 import com.citi.dao.RejectedDAO;
 
-@SpringBootApplication(scanBasePackages = "com")
-@EntityScan(basePackages = "com")
-@EnableJpaRepositories(basePackages = "com")
+@SpringBootApplication(scanBasePackages = "com.citi")
+@EntityScan(basePackages = "com.citi")
+@EnableJpaRepositories(basePackages = "com.citi")
 public class OrderMatchingSystemApplication {
 
 	
