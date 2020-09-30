@@ -61,8 +61,8 @@ public class OMS_Service implements IBidService, IOfferService
 	static int bidcount=0;
 	static int offercount=0;
 
-	
-
+	//apply Mapping
+	static double ltp=0;
 	
 
 	
@@ -396,6 +396,8 @@ public class OMS_Service implements IBidService, IOfferService
 										
 										executeddao.save(executed);
 										
+										ltp=of.price;
+										
 										
 										i.remove();
 										bid.remove(bid.size() - 1);
@@ -425,9 +427,12 @@ public class OMS_Service implements IBidService, IOfferService
 										executed.setDate(new Date());
 										executeddao.save(executed);
 										
+										ltp=of.price;
 										
 										i.remove();
 										offercount--;
+										
+										
 										
 									} else if (bid.get(bid.size() - 1).quantity < of.quantity) 
 									{
@@ -446,6 +451,9 @@ public class OMS_Service implements IBidService, IOfferService
 										
 										
 										executeddao.save(executed);
+										
+										ltp=of.price;
+										
 										bid.remove(bid.size() - 1);
 										bidcount--;
 										flag = 1;
@@ -496,7 +504,7 @@ public class OMS_Service implements IBidService, IOfferService
 											executeddao.save(executed);
 											
 											
-											
+											ltp=of_min.price;
 											
 											bid.remove(bid.size() - 1);
 											offer.removeIf(obj -> obj.offerId == of_min.getOfferId());
@@ -564,6 +572,8 @@ public class OMS_Service implements IBidService, IOfferService
 												
 												executeddao.save(executed);
 												
+												ltp=of_min.price;
+												
 												offer.removeIf(obj -> obj.offerId == of_min.getOfferId());
 												offercount--;
 											}
@@ -587,7 +597,7 @@ public class OMS_Service implements IBidService, IOfferService
 											
 											executeddao.save(executed);
 											
-											
+											ltp=of_min.price;
 											
 											bid.remove(bid.size() - 1);
 											bidcount--;
@@ -636,7 +646,7 @@ public class OMS_Service implements IBidService, IOfferService
 										
 										executeddao.save(executed);
 										
-										
+										ltp=bi.price;
 										
 										i.remove();       
 										offer.remove(offer.size() - 1);   
@@ -666,7 +676,7 @@ public class OMS_Service implements IBidService, IOfferService
 											
 											executeddao.save(executed);
 											
-											
+											ltp=bi.price;
 											
 											
 											
@@ -691,7 +701,7 @@ public class OMS_Service implements IBidService, IOfferService
 										
 										executeddao.save(executed);
 										
-										
+										ltp=bi.price;
 										
 										
 										offer.remove(offer.size() - 1);
@@ -743,7 +753,7 @@ public class OMS_Service implements IBidService, IOfferService
 								executeddao.save(executed);
 								
 								
-								
+								ltp=bid_max.price;
 								
 								
 								offer.remove(offer.size() - 1);
@@ -795,7 +805,7 @@ public class OMS_Service implements IBidService, IOfferService
 								
 								executeddao.save(executed);
 								
-								
+								ltp=bid_max.price;
 								
 								
 								bid.removeIf(obj -> obj.bidId == bid_max.getBidId());
@@ -818,7 +828,7 @@ public class OMS_Service implements IBidService, IOfferService
 								executeddao.save(executed);
 								
 								
-								
+								ltp=bid_max.price;
 
 								offer.remove(offer.size() - 1);
 								offercount--;

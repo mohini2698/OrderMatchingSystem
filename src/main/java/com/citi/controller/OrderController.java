@@ -34,7 +34,7 @@ import com.citi.service.OMS_Service;
 @CrossOrigin
 public class OrderController {
 	
-	Logger logger = LoggerFactory.getLogger(OrderController.class);
+	//Logger logger = LoggerFactory.getLogger(OrderController.class);
 	 
 	@Autowired
 	OrderDAO dao;
@@ -67,9 +67,9 @@ public class OrderController {
 	@RequestMapping(value="/orders",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderGenerator>> findAllOrders(@RequestBody OrderGenerator order)
 	{
-		logger.debug("in get list of all orders");
+	//	logger.debug("in get list of all orders");
 		List<OrderGenerator> orders=dao.findAll();
-		logger.debug(" all orders"+orders);
+	//	logger.debug(" all orders"+orders);
 		ResponseEntity<List<OrderGenerator>> response=new ResponseEntity<List<OrderGenerator>>(orders,HttpStatus.FOUND);
 		return response;
 	}
@@ -78,9 +78,9 @@ public class OrderController {
 	@RequestMapping(value="/executed",method = RequestMethod.GET)
 	public ResponseEntity<List<ExecutedTable>> findAllOrders(@RequestBody ExecutedTable order)
 	{
-		logger.debug("in get list of allExecutedOrders");
+	//	logger.debug("in get list of allExecutedOrders");
 		List<ExecutedTable> orders=exdao.findAll();
-		logger.debug(" All Executed Orders "+orders);
+	//	logger.debug(" All Executed Orders "+orders);
 		ResponseEntity<List<ExecutedTable>> response=new ResponseEntity<List<ExecutedTable>>(orders,HttpStatus.FOUND);
 		return response;
 	}
@@ -89,9 +89,9 @@ public class OrderController {
 	@RequestMapping(value="/rejected",method = RequestMethod.GET)
 	public ResponseEntity<List<RejectedTable>> findAllOrders(@RequestBody RejectedTable order)
 	{
-		logger.debug("in get list of All Rejected orders");
+	//	logger.debug("in get list of All Rejected orders");
 		List<RejectedTable> orders=rdao.findAll();
-		logger.debug(" All Rejected Orders "+orders);
+	//	logger.debug(" All Rejected Orders "+orders);
 		ResponseEntity<List<RejectedTable>> response=new ResponseEntity<List<RejectedTable>>(orders,HttpStatus.FOUND);
 		return response;
 	}
@@ -101,9 +101,9 @@ public class OrderController {
 	@RequestMapping(value="/orders",method = RequestMethod.POST)
 	public ResponseEntity<OrderGenerator> saveOrder(@RequestBody OrderGenerator order)
 	{
-		logger.debug("in post list of orders");
+	//	logger.debug("in post list of orders");
 		OrderGenerator added=dao.save(order);
-		logger.debug(" Added order: "+added);
+	//	logger.debug(" Added order: "+added);
 		ResponseEntity<OrderGenerator> response=new ResponseEntity<OrderGenerator>(added,HttpStatus.CREATED);
 		return response;
 	}
@@ -136,6 +136,9 @@ public class OrderController {
 
         return offerservice.findAllOrderByPriceAscDateAsc();
     }
+	
+	
+	
 
 	
 }
