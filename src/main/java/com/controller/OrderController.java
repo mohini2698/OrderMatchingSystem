@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dao.BidDAO;
 import com.dao.ExecutedDAO;
 import com.dao.OrderDAO;
+import com.dao.PendingDAO;
 import com.dao.RejectedDAO;
 import com.pojo.BidTable;
 import com.pojo.ExecutedTable;
 import com.pojo.OfferTable;
 import com.pojo.OrderGenerator;
+import com.pojo.PendingTable;
 import com.pojo.RejectedTable;
 import com.service.IBidService;
 import com.service.IOfferService;
@@ -55,6 +57,9 @@ public class OrderController {
 	@Autowired
 	private IOfferService offerservice;
 	
+	
+	@Autowired
+	private PendingDAO pendingdao;
 	
 	//1.logger
 	//2.ui logging
@@ -104,15 +109,15 @@ public class OrderController {
 	}
 	
 	
-	//bid get price quantity
-	
-	
-	
-	//offer get price quantity
-	
-	
-	
-	//if both can be possible in get mapping    //nested query ig
+	@RequestMapping(value="/pending",method = RequestMethod.GET)
+	public ResponseEntity<List<PendingTable>> findAllOrders(@RequestBody PendingTable order)
+	{
+	//	logger.debug("in get list of all orders");
+		List<PendingTable> orders=pendingdao.findAll();
+		//logger.debug(" all orders"+orders);
+		ResponseEntity<List<PendingTable>> response=new ResponseEntity<List<PendingTable>>(orders,HttpStatus.FOUND);
+		return response;
+	}
 	
 	
 	

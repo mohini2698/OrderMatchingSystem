@@ -10,6 +10,7 @@ import com.dao.BidDAO;
 import com.dao.ExecutedDAO;
 import com.dao.OfferDAO;
 import com.dao.OrderDAO;
+import com.dao.PendingDAO;
 import com.dao.RejectedDAO;
 
 @SpringBootApplication(scanBasePackages = "com")
@@ -32,6 +33,9 @@ public class OrderMatchingSystemApplication {
 	
 	@Autowired
 	RejectedDAO rejecteddao;
+	
+	@Autowired
+	PendingDAO pendingdao;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(OrderMatchingSystemApplication.class, args);

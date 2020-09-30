@@ -1,0 +1,116 @@
+package com.pojo;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity(name="oms_pending")
+public class PendingTable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int pendingId;
+	
+	public String orderType;
+	public String bid_offer;
+	public double price;
+	public int quantity;
+	
+	
+	//2020-09-27 20:16:49.441
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	Date date=new Date();
+
+
+	public PendingTable() {
+		
+	}
+
+
+	public PendingTable(int pendingId, String orderType, String bid_offer, double price, int quantity, Date date) {
+		
+		this.pendingId = pendingId;
+		this.orderType = orderType;
+		this.bid_offer = bid_offer;
+		this.price = price;
+		this.quantity = quantity;
+		this.date = date;
+	}
+
+
+	public int getPendingId() {
+		return pendingId;
+	}
+
+
+	public String getOrderType() {
+		return orderType;
+	}
+
+
+	public String getBid_offer() {
+		return bid_offer;
+	}
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setPendingId(int pendingId) {
+		this.pendingId = pendingId;
+	}
+
+
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
+
+
+	public void setBid_offer(String bid_offer) {
+		this.bid_offer = bid_offer;
+	}
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+	@Override
+	public String toString() {
+		return "PendingTable [pendingId=" + pendingId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
+	}
+	
+	
+	
+	
+	
+}

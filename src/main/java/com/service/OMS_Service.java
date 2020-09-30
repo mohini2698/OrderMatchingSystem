@@ -21,12 +21,14 @@ import com.dao.BidDAO;
 import com.dao.ExecutedDAO;
 import com.dao.OfferDAO;
 import com.dao.OrderDAO;
+import com.dao.PendingDAO;
 import com.dao.RejectedDAO;
 import com.pojo.BidTable;
 import com.pojo.ExecutedTable;
 import com.pojo.OfferTable;
 //import com.pojo.Order;
 import com.pojo.OrderGenerator;
+import com.pojo.PendingTable;
 import com.pojo.RejectedTable;
 
 @Service
@@ -53,41 +55,48 @@ public class OMS_Service implements IBidService, IOfferService
 	private RejectedDAO rejecteddao;
 	
 	
+	@Autowired
+	private PendingDAO pendingdao;
+	
+	
 	static int bidcount=0;
 	static int offercount=0;
 
 	
 
+	
+
+	
+
 	public OMS_Service(OrderDAO orderdao, BidDAO biddao, OfferDAO offerdao, ExecutedDAO executeddao,
-			RejectedDAO rejecteddao) {
-		
-		//this.logger = logger;
+			RejectedDAO rejecteddao, PendingDAO pendingdao) {
 		this.orderdao = orderdao;
 		this.biddao = biddao;
 		this.offerdao = offerdao;
 		this.executeddao = executeddao;
 		this.rejecteddao = rejecteddao;
+		this.pendingdao = pendingdao;
 	}
 
 	@PostConstruct
 	public void checkdatabase() {
 
-//		int orderId = 1;
-//		boolean exists = orderdao.existsById(orderId);
-//
-//		if (exists == false) {
-//			loaddata();
-//	 	}
+		int orderId = 1;
+		boolean exists = orderdao.existsById(orderId);
+
+		if (exists == false) {
+			loaddata();
+	 	}
 		
 		
 		//separatedata();
 
-//		int bidId = 1;
-//		boolean exists1 = biddao.existsById(orderId);
-//
-//		if (exists1 == false) {
-//			separatedata();
-//		}
+		int bidId = 1;
+		boolean exists1 = biddao.existsById(orderId);
+
+		if (exists1 == false) {
+			separatedata();
+		}
 		System.out.println("***********************************************************************************************8in post construct");
 		OrderBook();
 
@@ -108,7 +117,15 @@ public class OMS_Service implements IBidService, IOfferService
 
 			order.setBid_offer(ro.getBid_offer());
 			order.setOrderType(ro.getOrderType());
-			order.setPrice(ro.getPrice());
+			if(ro.orderType=="market")
+			{
+				order.setPrice(0.00);
+			}
+			else
+			{
+				order.setPrice(ro.getPrice());
+			}
+			
 			order.setQuantity(ro.getQuantity());
 			order.setDate(ro.getDate());
 
@@ -210,6 +227,8 @@ public class OMS_Service implements IBidService, IOfferService
 			price=o.getPrice();
 			q=o.getQuantity();
 			d=o.getDate();
+			
+			
 		
 			
 			
@@ -239,6 +258,7 @@ public class OMS_Service implements IBidService, IOfferService
 						rejected.setPrice(0);
 						rejected.setQuantity(o.quantity);
 						
+						rejecteddao.save(rejected);
 						
 						
 						
@@ -281,6 +301,9 @@ public class OMS_Service implements IBidService, IOfferService
 						rejected.setPrice(0);
 						rejected.setQuantity(o.quantity);
 						
+
+						rejecteddao.save(rejected);
+						
 						System.out.println("*************************No Bid - order is rejected");
 
 					}
@@ -300,6 +323,38 @@ public class OMS_Service implements IBidService, IOfferService
 			System.out.println("**********"+bid);
 			System.out.println("**********"+offer);
 		
+		}
+		
+		//put in pending
+		//PendingTable pendingtable=new PendingTable();
+		
+		for(int i=0;i<bid.size();i++)
+		{
+			PendingTable pendingtable=new PendingTable();
+			
+			pendingtable.setBid_offer("bid");
+			pendingtable.setDate(new Date());
+			pendingtable.setOrderType(bid.get(i).orderType);
+			pendingtable.setPrice(bid.get(i).price);
+			pendingtable.setQuantity(bid.get(i).quantity);
+			
+			System.out.println(bid.get(i)+"\n saving to bid");
+			
+			pendingdao.save(pendingtable);
+		}
+		for(int j=0;j<offer.size();j++)
+		{
+			PendingTable pendingtable=new PendingTable();
+			
+			pendingtable.setBid_offer("offer");
+			pendingtable.setDate(new Date());
+			pendingtable.setOrderType(offer.get(j).orderType);
+			pendingtable.setPrice(offer.get(j).price);
+			pendingtable.setQuantity(offer.get(j).quantity);
+			
+			System.out.println(offer.get(j)+"\n saving to offer");
+			
+			pendingdao.save(pendingtable);
 		}
 		
 		
@@ -448,7 +503,8 @@ public class OMS_Service implements IBidService, IOfferService
 											flag=1;
 											break;
 
-										} else if (bid.get(bid.size() - 1).quantity > of_min.getQuantity()) {
+										} else if (bid.get(bid.size() - 1).quantity > of_min.getQuantity()) 
+										{
 											int qty_offers=0;
 											for(OfferTable of:offer){
 												qty_offers+=of.quantity;
@@ -468,6 +524,10 @@ public class OMS_Service implements IBidService, IOfferService
 												
 												
 												rejecteddao.save(rejected);
+												
+												System.out.println("\n**************bid removed market rejected");
+												bid.remove(bid.size() - 1);
+												bidcount--;
 												
 												break;
 												
@@ -711,7 +771,10 @@ public class OMS_Service implements IBidService, IOfferService
 									
 									
 									rejecteddao.save(rejected);
+									offercount--;
 									System.out.println("Bid id: "+bid.get(bid.size() - 1).bidId+"rejected since the quantity can't be satisfied");
+									break;
+									
 								}
 								else{
 								System.out.println("Partial execution Offer w bid id: " + bid_max.getBidId()
