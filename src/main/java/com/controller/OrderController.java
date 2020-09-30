@@ -32,7 +32,7 @@ import com.service.OMS_Service;
 @CrossOrigin
 public class OrderController {
 	
-	 Logger logger = LoggerFactory.getLogger(OrderController.class);
+	 //Logger logger = LoggerFactory.getLogger(OrderController.class);
 	 
 	@Autowired
 	OrderDAO dao;
@@ -67,9 +67,9 @@ public class OrderController {
 	@RequestMapping(value="/orders",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderGenerator>> findAllOrders(@RequestBody OrderGenerator order)
 	{
-		logger.debug("in get list of all orders");
+	//	logger.debug("in get list of all orders");
 		List<OrderGenerator> orders=dao.findAll();
-		logger.debug(" all orders"+orders);
+		//logger.debug(" all orders"+orders);
 		ResponseEntity<List<OrderGenerator>> response=new ResponseEntity<List<OrderGenerator>>(orders,HttpStatus.FOUND);
 		return response;
 	}

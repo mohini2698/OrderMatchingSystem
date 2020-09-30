@@ -29,10 +29,10 @@ public class RejectedTable{
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	/*@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private OrderGenerator ordergenerator;
-
+*/
 	
 	
 	public RejectedTable() {
@@ -41,26 +41,39 @@ public class RejectedTable{
 
 
 
-	public RejectedTable(int rejected_id, String orderType, String bid_offer, double price, int quantity, Date date,
-			OrderGenerator ordergenerator) {
-		super();
+	
+
+
+
+		
+
+
+
+	public RejectedTable(int rejected_id, String orderType, String bid_offer, double price, int quantity, Date date) {
+		
 		this.rejected_id = rejected_id;
 		this.orderType = orderType;
 		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
 		this.date = date;
-		this.ordergenerator = ordergenerator;
 	}
 
 
 
-		@Override
-		public String toString() {
-			return "RejectedTable [rejected_id=" + rejected_id + ", orderType=" + orderType + ", bid_offer=" + bid_offer
-					+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + ", ordergenerator="
-					+ ordergenerator + "]";
-		}
+
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "RejectedTable [rejected_id=" + rejected_id + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
+	}
 
 
 
@@ -136,15 +149,7 @@ public class RejectedTable{
 
 
 
-	public OrderGenerator getOrdergenerator() {
-		return ordergenerator;
-	}
-
-
-
-	public void setOrdergenerator(OrderGenerator ordergenerator) {
-		this.ordergenerator = ordergenerator;
-	}
+	
 
 	
 

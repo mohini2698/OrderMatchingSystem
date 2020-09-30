@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.dao.BidDAO;
+import com.dao.ExecutedDAO;
 import com.dao.OfferDAO;
 import com.dao.OrderDAO;
+import com.dao.RejectedDAO;
 
 @SpringBootApplication(scanBasePackages = "com")
 @EntityScan(basePackages = "com")
@@ -24,6 +26,12 @@ public class OrderMatchingSystemApplication {
 	
 	@Autowired
 	OfferDAO offerdao;
+	
+	@Autowired
+	ExecutedDAO executeddao;
+	
+	@Autowired
+	RejectedDAO rejecteddao;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(OrderMatchingSystemApplication.class, args);

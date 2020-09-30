@@ -51,7 +51,7 @@ public class RandomOrders {
 	
 	//price //circuit check satisfied
 	public double getPrice() {
-		double p = roundTwoDecimals(getRandomDoubleBetweenRange(3000.00,3100.00));
+		double p = roundTwoDecimals(getRandomDoubleBetweenRange(3000.00,3020.00));
 		return Math.round(p * 2) / 2.0;
 	}
 

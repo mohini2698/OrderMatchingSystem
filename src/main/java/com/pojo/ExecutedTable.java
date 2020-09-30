@@ -23,9 +23,11 @@ public class ExecutedTable {
 	
 	
 	public String orderType;
-	public String bid_offer;
+	
 	public double price;
 	public int quantity;
+	public int bidId;
+	public int offerId;
 	
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
@@ -41,28 +43,94 @@ public class ExecutedTable {
 	}
 
 
-	public ExecutedTable(int tradeId, String orderType, String bid_offer, double price, int quantity, Date date
-			) {
+	
+
+
+	
+	
+
+
+	public ExecutedTable(int tradeId, String orderType, double price, int quantity, int bidId, int offerId, Date date) {
 		
 		this.tradeId = tradeId;
 		this.orderType = orderType;
-		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
+		this.bidId = bidId;
+		this.offerId = offerId;
 		this.date = date;
-		
 	}
 
 
+
+
+
+
+
+
+
 	
-	
+
+	public int getBidId() {
+		return bidId;
+	}
+
+
+
+
+
+
+
+
+
+	public int getOfferId() {
+		return offerId;
+	}
+
+
+
+
+
+
+
+
+
+	public void setBidId(int bidId) {
+		this.bidId = bidId;
+	}
+
+
+
+
+
+
+
+
+
+	public void setOfferId(int offerId) {
+		this.offerId = offerId;
+	}
+
+
+
+
+
+
+
 
 
 	@Override
 	public String toString() {
-		return "ExecutedTable [tradeId=" + tradeId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
-				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
+		return "ExecutedTable [tradeId=" + tradeId + ", orderType=" + orderType + ", price=" + price + ", quantity="
+				+ quantity + ", bidId=" + bidId + ", offerId=" + offerId + ", date=" + date + "]";
 	}
+
+
+
+
+
+
+
 
 
 	public int getTradeId() {
@@ -85,14 +153,7 @@ public class ExecutedTable {
 	}
 
 
-	public String getBid_offer() {
-		return bid_offer;
-	}
-
-
-	public void setBid_offer(String bid_offer) {
-		this.bid_offer = bid_offer;
-	}
+	
 
 
 	public double getPrice() {
