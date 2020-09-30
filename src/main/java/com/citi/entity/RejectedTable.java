@@ -1,4 +1,5 @@
-package com.pojo;
+package com.citi.entity;
+
 
 import java.util.Date;
 
@@ -13,103 +14,52 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="oms_executed")
-public class ExecutedTable {
-	
+@Entity(name="oms_rejected")
+public class RejectedTable{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int tradeId;
-	
-	
+	public int rejected_id;
 	
 	public String orderType;
-	
+	public String bid_offer;
 	public double price;
 	public int quantity;
-	public int bidId;
-	public int offerId;
 	
 	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	Date date=new Date();
 	
-	
 	/*@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="orderId")
-	private OrderGenerator ordergenerator;*/
-
-
-	public ExecutedTable() {
+	private OrderGenerator ordergenerator;
+*/
+	
+	
+	public RejectedTable() {
 		//super();
 	}
 
 
-	
-
 
 	
-	
 
 
-	public ExecutedTable(int tradeId, String orderType, double price, int quantity, int bidId, int offerId, Date date) {
+
 		
-		this.tradeId = tradeId;
+
+
+
+	public RejectedTable(int rejected_id, String orderType, String bid_offer, double price, int quantity, Date date) {
+		
+		this.rejected_id = rejected_id;
 		this.orderType = orderType;
+		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
-		this.bidId = bidId;
-		this.offerId = offerId;
 		this.date = date;
 	}
 
 
-
-
-
-
-
-
-
-	
-
-	public int getBidId() {
-		return bidId;
-	}
-
-
-
-
-
-
-
-
-
-	public int getOfferId() {
-		return offerId;
-	}
-
-
-
-
-
-
-
-
-
-	public void setBidId(int bidId) {
-		this.bidId = bidId;
-	}
-
-
-
-
-
-
-
-
-
-	public void setOfferId(int offerId) {
-		this.offerId = offerId;
-	}
 
 
 
@@ -121,26 +71,22 @@ public class ExecutedTable {
 
 	@Override
 	public String toString() {
-		return "ExecutedTable [tradeId=" + tradeId + ", orderType=" + orderType + ", price=" + price + ", quantity="
-				+ quantity + ", bidId=" + bidId + ", offerId=" + offerId + ", date=" + date + "]";
+		return "RejectedTable [rejected_id=" + rejected_id + ", orderType=" + orderType + ", bid_offer=" + bid_offer
+				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
 	}
 
 
 
-
-
-
-
-
-
-	public int getTradeId() {
-		return tradeId;
+	public int getRejected_id() {
+		return rejected_id;
 	}
 
 
-	public void setTradeId(int tradeId) {
-		this.tradeId = tradeId;
+
+	public void setRejected_id(int rejected_id) {
+		this.rejected_id = rejected_id;
 	}
+
 
 
 	public String getOrderType() {
@@ -148,12 +94,23 @@ public class ExecutedTable {
 	}
 
 
+
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
 
 
-	
+
+	public String getBid_offer() {
+		return bid_offer;
+	}
+
+
+
+	public void setBid_offer(String bid_offer) {
+		this.bid_offer = bid_offer;
+	}
+
 
 
 	public double getPrice() {
@@ -161,9 +118,11 @@ public class ExecutedTable {
 	}
 
 
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 
 
 	public int getQuantity() {
@@ -171,9 +130,11 @@ public class ExecutedTable {
 	}
 
 
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
 
 
 	public Date getDate() {
@@ -181,13 +142,19 @@ public class ExecutedTable {
 	}
 
 
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
 
+
 	
 
 	
+
 	
+
+
+		
 }

@@ -6,12 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.dao.BidDAO;
-import com.dao.ExecutedDAO;
-import com.dao.OfferDAO;
-import com.dao.OrderDAO;
-import com.dao.PendingDAO;
-import com.dao.RejectedDAO;
+import com.citi.dao.BidDAO;
+import com.citi.dao.ExecutedDAO;
+import com.citi.dao.OfferDAO;
+import com.citi.dao.OrderDAO;
+import com.citi.dao.PendingDAO;
+import com.citi.dao.RejectedDAO;
 
 @SpringBootApplication(scanBasePackages = "com")
 @EntityScan(basePackages = "com")

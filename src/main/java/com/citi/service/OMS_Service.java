@@ -1,4 +1,4 @@
-package com.service;
+package com.citi.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,19 +17,18 @@ import org.springframework.data.domain.Sort;
 import org.springframework.retry.backoff.Sleeper;
 import org.springframework.stereotype.Service;
 
-import com.dao.BidDAO;
-import com.dao.ExecutedDAO;
-import com.dao.OfferDAO;
-import com.dao.OrderDAO;
-import com.dao.PendingDAO;
-import com.dao.RejectedDAO;
-import com.pojo.BidTable;
-import com.pojo.ExecutedTable;
-import com.pojo.OfferTable;
-//import com.pojo.Order;
-import com.pojo.OrderGenerator;
-import com.pojo.PendingTable;
-import com.pojo.RejectedTable;
+import com.citi.dao.BidDAO;
+import com.citi.dao.ExecutedDAO;
+import com.citi.dao.OfferDAO;
+import com.citi.dao.OrderDAO;
+import com.citi.dao.PendingDAO;
+import com.citi.dao.RejectedDAO;
+import com.citi.entity.BidTable;
+import com.citi.entity.ExecutedTable;
+import com.citi.entity.OfferTable;
+import com.citi.entity.OrderGenerator;
+import com.citi.entity.PendingTable;
+import com.citi.entity.RejectedTable;
 
 @Service
 public class OMS_Service implements IBidService, IOfferService 
@@ -98,6 +97,7 @@ public class OMS_Service implements IBidService, IOfferService
 			separatedata();
 		}
 		System.out.println("***********************************************************************************************8in post construct");
+		
 		OrderBook();
 
 		// ************
@@ -332,6 +332,7 @@ public class OMS_Service implements IBidService, IOfferService
 		{
 			PendingTable pendingtable=new PendingTable();
 			
+			pendingtable.setOrderId(bid.get(i).orderId);
 			pendingtable.setBid_offer("bid");
 			pendingtable.setDate(new Date());
 			pendingtable.setOrderType(bid.get(i).orderType);
@@ -346,6 +347,7 @@ public class OMS_Service implements IBidService, IOfferService
 		{
 			PendingTable pendingtable=new PendingTable();
 			
+			pendingtable.setOrderId(offer.get(j).orderId);
 			pendingtable.setBid_offer("offer");
 			pendingtable.setDate(new Date());
 			pendingtable.setOrderType(offer.get(j).orderType);

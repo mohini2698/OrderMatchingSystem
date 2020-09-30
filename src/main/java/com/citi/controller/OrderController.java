@@ -1,4 +1,4 @@
-package com.controller;
+package com.citi.controller;
 
 import java.util.List;
 
@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dao.BidDAO;
-import com.dao.ExecutedDAO;
-import com.dao.OrderDAO;
-import com.dao.PendingDAO;
-import com.dao.RejectedDAO;
-import com.pojo.BidTable;
-import com.pojo.ExecutedTable;
-import com.pojo.OfferTable;
-import com.pojo.OrderGenerator;
-import com.pojo.PendingTable;
-import com.pojo.RejectedTable;
-import com.service.IBidService;
-import com.service.IOfferService;
-import com.service.OMS_Service;
+import com.citi.dao.BidDAO;
+import com.citi.dao.ExecutedDAO;
+import com.citi.dao.OrderDAO;
+import com.citi.dao.PendingDAO;
+import com.citi.dao.RejectedDAO;
+import com.citi.entity.BidTable;
+import com.citi.entity.ExecutedTable;
+import com.citi.entity.OfferTable;
+import com.citi.entity.OrderGenerator;
+import com.citi.entity.PendingTable;
+import com.citi.entity.RejectedTable;
+import com.citi.service.IBidService;
+import com.citi.service.IOfferService;
+import com.citi.service.OMS_Service;
 
 @RestController
 @CrossOrigin
 public class OrderController {
 	
-	 //Logger logger = LoggerFactory.getLogger(OrderController.class);
+	Logger logger = LoggerFactory.getLogger(OrderController.class);
 	 
 	@Autowired
 	OrderDAO dao;
@@ -61,49 +61,49 @@ public class OrderController {
 	@Autowired
 	private PendingDAO pendingdao;
 	
-	//1.logger
-	//2.ui logging
-	//3.request mapping
-	//4.packet refactor com.citi.dao com.citi.entity
-	//5.Rest .. crossorigin
+
 	
-	//to get all orders from pending table
-	//@GetMapping("/orders")
+	//to get all orders from table
 	@RequestMapping(value="/orders",method = RequestMethod.GET)
 	public ResponseEntity<List<OrderGenerator>> findAllOrders(@RequestBody OrderGenerator order)
 	{
-	//	logger.debug("in get list of all orders");
+		logger.debug("in get list of all orders");
 		List<OrderGenerator> orders=dao.findAll();
-		//logger.debug(" all orders"+orders);
+		logger.debug(" all orders"+orders);
 		ResponseEntity<List<OrderGenerator>> response=new ResponseEntity<List<OrderGenerator>>(orders,HttpStatus.FOUND);
 		return response;
 	}
 	
 	//to get all orders from executed table
-	@GetMapping("/executed")
+	@RequestMapping(value="/executed",method = RequestMethod.GET)
 	public ResponseEntity<List<ExecutedTable>> findAllOrders(@RequestBody ExecutedTable order)
 	{
+		logger.debug("in get list of allExecutedOrders");
 		List<ExecutedTable> orders=exdao.findAll();
+		logger.debug(" All Executed Orders "+orders);
 		ResponseEntity<List<ExecutedTable>> response=new ResponseEntity<List<ExecutedTable>>(orders,HttpStatus.FOUND);
 		return response;
 	}
 	
 	//to get all orders from rejected table
-	@GetMapping("/rejected")
+	@RequestMapping(value="/rejected",method = RequestMethod.GET)
 	public ResponseEntity<List<RejectedTable>> findAllOrders(@RequestBody RejectedTable order)
 	{
+		logger.debug("in get list of All Rejected orders");
 		List<RejectedTable> orders=rdao.findAll();
+		logger.debug(" All Rejected Orders "+orders);
 		ResponseEntity<List<RejectedTable>> response=new ResponseEntity<List<RejectedTable>>(orders,HttpStatus.FOUND);
 		return response;
 	}
 	
 	
 	//to add orders in pending table
-	@PostMapping("/orders")
+	@RequestMapping(value="/orders",method = RequestMethod.POST)
 	public ResponseEntity<OrderGenerator> saveOrder(@RequestBody OrderGenerator order)
 	{
+		logger.debug("in post list of orders");
 		OrderGenerator added=dao.save(order);
-		
+		logger.debug(" Added order: "+added);
 		ResponseEntity<OrderGenerator> response=new ResponseEntity<OrderGenerator>(added,HttpStatus.CREATED);
 		return response;
 	}

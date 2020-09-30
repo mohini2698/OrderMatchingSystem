@@ -1,4 +1,4 @@
-package com.dao;
+package com.citi.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pojo.BidTable;
+import com.citi.entity.BidTable;
 
 @Repository
 public interface BidDAO extends CrudRepository<BidTable, Integer>{

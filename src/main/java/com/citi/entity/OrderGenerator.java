@@ -1,4 +1,4 @@
-package com.pojo;
+package com.citi.entity;
 
 import java.io.Serializable;
 import java.util.Date;

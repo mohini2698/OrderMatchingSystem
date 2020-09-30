@@ -1,51 +1,75 @@
-package com.pojo;
+package com.citi.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="oms_pending")
-public class PendingTable {
+@Entity(name="oms_bid")
+public class BidTable {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int pendingId;
+	public int bidId;
 	
 	public String orderType;
-	public String bid_offer;
 	public double price;
 	public int quantity;
 	
 	
 	//2020-09-27 20:16:49.441
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.sss")
 	Date date=new Date();
+	
+	public int orderId;
+	
+	
+	/*@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="orderId")
+	private OrderGenerator ordergenerator;
+*/
+	
 
-
-	public PendingTable() {
+	
+	public BidTable() {
 		
 	}
 
 
-	public PendingTable(int pendingId, String orderType, String bid_offer, double price, int quantity, Date date) {
+
+	
+
+
+
+	public BidTable(int bidId, String orderType, double price, int quantity, Date date, int orderId) {
 		
-		this.pendingId = pendingId;
+		this.bidId = bidId;
 		this.orderType = orderType;
-		this.bid_offer = bid_offer;
 		this.price = price;
 		this.quantity = quantity;
 		this.date = date;
+		this.orderId = orderId;
 	}
 
 
-	public int getPendingId() {
-		return pendingId;
+
+
+
+
+
+	public int getBidId() {
+		return bidId;
 	}
+
 
 
 	public String getOrderType() {
@@ -53,14 +77,11 @@ public class PendingTable {
 	}
 
 
-	public String getBid_offer() {
-		return bid_offer;
-	}
-
 
 	public double getPrice() {
 		return price;
 	}
+
 
 
 	public int getQuantity() {
@@ -68,14 +89,21 @@ public class PendingTable {
 	}
 
 
+
 	public Date getDate() {
 		return date;
 	}
 
 
-	public void setPendingId(int pendingId) {
-		this.pendingId = pendingId;
+
+
+
+
+
+	public void setBidId(int bidId) {
+		this.bidId = bidId;
 	}
+
 
 
 	public void setOrderType(String orderType) {
@@ -83,14 +111,11 @@ public class PendingTable {
 	}
 
 
-	public void setBid_offer(String bid_offer) {
-		this.bid_offer = bid_offer;
-	}
-
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 
 
 	public void setQuantity(int quantity) {
@@ -98,17 +123,47 @@ public class PendingTable {
 	}
 
 
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
 
+
+
+
+
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+
+
+
+
+
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "PendingTable [pendingId=" + pendingId + ", orderType=" + orderType + ", bid_offer=" + bid_offer
-				+ ", price=" + price + ", quantity=" + quantity + ", date=" + date + "]";
+		return "BidTable [bidId=" + bidId + ", orderType=" + orderType + ", price=" + price + ", quantity=" + quantity
+				+ ", date=" + date + ", orderId=" + orderId + "]";
 	}
-	
+
+
+
+
+
 	
 	
 	

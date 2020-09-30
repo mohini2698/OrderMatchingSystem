@@ -1,4 +1,4 @@
-package com.service;
+package com.citi.service;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;

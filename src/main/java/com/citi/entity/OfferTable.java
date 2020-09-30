@@ -1,4 +1,4 @@
-package com.pojo;
+package com.citi.entity;
 
 import java.util.Date;
 
@@ -13,13 +13,11 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="oms_bid")
-public class BidTable {
-
-	
+@Entity(name="oms_offer")
+public class OfferTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int bidId;
+	public int offerId;
 	
 	public String orderType;
 	public double price;
@@ -35,12 +33,11 @@ public class BidTable {
 	
 	/*@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="orderId")
-	private OrderGenerator ordergenerator;
-*/
-	
+	private OrderGenerator ordergenerator;*/
+
 
 	
-	public BidTable() {
+	public OfferTable() {
 		
 	}
 
@@ -50,9 +47,9 @@ public class BidTable {
 
 
 
-	public BidTable(int bidId, String orderType, double price, int quantity, Date date, int orderId) {
+	public OfferTable(int offerId, String orderType, double price, int quantity, Date date, int orderId) {
 		
-		this.bidId = bidId;
+		this.offerId = offerId;
 		this.orderType = orderType;
 		this.price = price;
 		this.quantity = quantity;
@@ -66,8 +63,8 @@ public class BidTable {
 
 
 
-	public int getBidId() {
-		return bidId;
+	public int getOfferId() {
+		return offerId;
 	}
 
 
@@ -96,12 +93,10 @@ public class BidTable {
 
 
 
+	
 
-
-
-
-	public void setBidId(int bidId) {
-		this.bidId = bidId;
+	public void setOfferId(int offerId) {
+		this.offerId = offerId;
 	}
 
 
@@ -156,13 +151,13 @@ public class BidTable {
 
 	@Override
 	public String toString() {
-		return "BidTable [bidId=" + bidId + ", orderType=" + orderType + ", price=" + price + ", quantity=" + quantity
-				+ ", date=" + date + ", orderId=" + orderId + "]";
+		return "OfferTable [offerId=" + offerId + ", orderType=" + orderType + ", price=" + price + ", quantity="
+				+ quantity + ", date=" + date + ", orderId=" + orderId + "]";
 	}
 
 
 
-
+	
 
 	
 	

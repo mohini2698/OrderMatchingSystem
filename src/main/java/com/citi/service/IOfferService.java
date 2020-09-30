@@ -1,9 +1,8 @@
-package com.service;
+package com.citi.service;
 
 import java.util.List;
 
-
-import com.pojo.OfferTable;
+import com.citi.entity.OfferTable;
 
 public interface IOfferService {
 
